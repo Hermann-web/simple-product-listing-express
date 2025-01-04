@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  fetch('http://localhost:3000/products')
+  fetch(getApiEndpoint('products'))
     .then(response => response.json())
     .then(products => {
       const productList = document.getElementById('product-list');
@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const categoryButton = document.createElement('a');
         categoryButton.className = 'btn btn-secondary';
-        categoryButton.href = 'http://localhost:3000/products';
-        categoryButton.textContent = 'GET http://localhost:3000/products';
+        categoryButton.href = getApiEndpoint('products');
+        categoryButton.textContent = `GET ${getApiEndpoint('products')}`;
         productList.appendChild(categoryButton);
 
         const row = document.createElement('div');
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           const img = document.createElement('img');
           img.className = 'card-img-top';
-          img.src = `http://localhost:3000/${product.img}`;
+          img.src = getApiEndpoint(`${product.img}`);
           img.alt = product.name;
           img.style = 'max-height: 150px; object-fit: cover;';
 
@@ -82,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
           const apiDetailsButton = document.createElement('a');
           apiDetailsButton.className = 'btn btn-secondary';
-          apiDetailsButton.href = `http://localhost:3000/products/${product.id}`;
-          apiDetailsButton.textContent = `GET http://localhost:3000/products/${product.id}`;
+          apiDetailsButton.href = getApiEndpoint(`products/${product.id}`);
+          apiDetailsButton.textContent = `GET ${getApiEndpoint(`products/${product.id}`)}`;
           cardBody.appendChild(apiDetailsButton);
         });
       });
