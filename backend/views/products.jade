@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+  each category in [...new Set(products.map(elt => elt.category))]
+    h2= category
+    a.btn.btn-secondary(href=`/products/`) GET /products
+    .row
+      each product in products.filter(p => p.category === category)
+        .col-md-3
+          .card.mb-4.shadow-sm
+            img.card-img-top(src=product.img, alt=product.name, style='max-height: 150px; object-fit: cover;')
+            .card-body
+              h5.card-title= product.name
+              p.card-text Price: #{product.price}
+              p.card-text Category: #{product.category}
+              p.card-text Total CO2 footprint: #{product.totalFootprint} kg
+              p.card-text Ingredients:
+              ul
+                each ingredient in product.ingredients
+                  li #{ingredient.name} - CO2 footprint: #{ingredient.co2} kg
+              a.btn.btn-primary(href=`/products/${product.id}/view/`) View Details
+              a.btn.btn-secondary(href=`/products/${product.id}`) GET /products/#{product.id}

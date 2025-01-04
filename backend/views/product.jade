@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  .card
+    img.card-img-top(src=product.img, alt=product.name, style='max-height: 500px; object-fit: cover;')
+    .card-body
+      h5.card-title= product.name
+      p.card-text Price: #{product.price}
+      p.card-text Category: #{product.category}
+      p.card-text Total CO2 footprint: #{product.totalFootprint} kg
+      p.card-text Ingredients:
+      ul
+        each ingredient in product.ingredients
+          li #{ingredient.name} - CO2 footprint: #{ingredient.co2} kg
+      a.btn.btn-secondary(href=`/products/${product.id}`) GET /products/#{product.id}
